@@ -23,7 +23,7 @@ static const auto naturalSortQstringComparator = [](const QString& l, const QStr
 	collator.setCaseSensitivity(Qt::CaseInsensitive);
 
 	// Fix for the new breaking changes in QCollator in Qt 5.14 - null strings are no longer a valid input
-	return collator.compare(qToStringViewIgnoringNull(l), qToStringViewIgnoringNull(r)) < 0;
+	return collator.compare(l.data(),l.size(),r.data(),r.size()) < 0;
 };
 
 CAutoUpdaterGithub::CAutoUpdaterGithub(const QString& githubRepositoryAddress, const QString& currentVersionString, const std::function<bool (const QString&, const QString&)>& versionStringComparatorLessThan) :
